@@ -71,7 +71,12 @@
 
   @media screen and (max-width: 750px) {
     .roadmap-section{
-        display: none;
+      margin-top: 4rem;
+      width: 100%;
+      background-image: url('/tokenMobilBG.svg');
+      min-height: 100vh;      
+       /* Background image, equivalent to bg-roadmap-bg */
+      background-size: cover; 
     }
     
   .roadmap-section-mobile{

@@ -1,14 +1,17 @@
 import React, {useState} from "react";
 import "./Navbar.css"
+import Accordian from "./Accordian";
 // import BuyDoge from "./Buydoge";
 const Navbar = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const [isDropDown,setIsDropDown] = useState(false);
 
   const toggleMenu = () => {
     setIsMenuOpen(!isMenuOpen);
   };
 
   return (
+
     <div className='navbar'>
       {/* Logo and Heading */}
       <div class="logo-container">
@@ -60,14 +63,121 @@ const Navbar = () => {
           </a>
         </div>
       </div> */}
-      <div class="menu-container">
+      {/* <div class="menu-container">
         <div class="menu-links">
             <a class="menu-link" href='#'>Home</a>
             <a class="menu-link" href='#tokenomics'>Tokenomics</a>
             <a class="menu-link" href='#how_to_buy'>How to buy?</a>
+            <div class="dropdown" href='#how_to_buy'>Products</div>
             <a class="menu-link" href='#roadmap'>Roadmap</a>
         </div>
       </div>
+
+      <div className="dropdown-content ">
+
+      </div> */}
+
+      <div className="menu-container">
+          <div className="menu-links">
+              <a className="menu-link" href='#'>Home</a>
+              <a className="menu-link" href='#tokenomics'>Tokenomics</a>
+              <a className="menu-link" href='#how_to_buy'>How to buy?</a>
+
+              {/* Dropdown menu */}
+              {/* <div className="dropdown">
+                  <button className="dropbtn menu-link">Products</button>
+                  <div className="dropdown-content">
+                      <a href="#">Product 1</a>
+                      <a href="#">Product 2</a>
+                      <a href="#">Product 3</a>
+                  </div>
+              </div> */}
+
+              <a className="menu-link"
+              style={{
+                cursor:"pointer"
+              }}
+              onMouseEnter={() => setIsDropDown(true)} // Show dropdown on hover
+              onMouseLeave={() => setIsDropDown(false)} // Hide dropdown when not hovering
+              >Products</a>
+
+              <a className="menu-link" href='#roadmap'>Roadmap</a>
+          </div>
+      </div>
+      {
+        isDropDown &&
+        <div  onMouseEnter={() => setIsDropDown(true)} 
+        onMouseLeave={() => setIsDropDown(false)}
+        className="dropdown-content">
+          <div className="dropdown-row">
+            <div className="dropdown-column">
+              <img src="airPad.svg" alt="airpad icon" />
+              <div className="dropdown-heading">
+                <div>
+                Air Pad 
+                </div>
+                <div className="dropdwon-subheading">
+                Token Sale launch platform
+                </div>
+              </div>
+            </div>
+            <div className="dropdown-column">
+            <div style={{
+                width:"68px",
+                height:"68px",
+                backgroundColor:"rgba(255, 188, 109, 1)",
+                borderRadius:"100%"
+              }}>
+              </div>
+              <div className="dropdown-heading">
+                <div>
+                Gaming
+                </div>
+                <div className="dropdwon-subheading">
+                On-chain mini games
+                </div>
+              </div>
+            </div>
+
+          </div>
+          <div className="dropdown-row">
+          <div className="dropdown-column" onClick={() =>{
+            window.open("https://airdaomarkets.xyz")
+          }} style={{
+            cursor:"pointer"
+          }}>
+              <img src="AMIcon.svg" alt="airpad icon" />
+              <div className="dropdown-heading">
+                <div>
+                AirDao Markets
+                </div>
+                <div className="dropdwon-subheading">
+                Prediction marketplace for web3 and web2 users
+                </div>
+              </div>
+            </div>
+            <div className="dropdown-column">
+              <div style={{
+                width:"68px",
+                height:"68px",
+                backgroundColor:"rgba(214, 117, 250, 1)",
+                borderRadius:"100%"
+              }}>
+              </div>
+              <div className="dropdown-heading">
+                <div>
+                NFT
+                </div>
+                <div className="dropdwon-subheading">
+                $ADOGE Utility NFTs
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      }
+
+      
 
 
       {/* Hamburger Menu button for mobile/tablet */}
@@ -146,16 +256,20 @@ const Navbar = () => {
 
         {isMenuOpen && (
         <div className="menu">
-            <a className="menu-link" href="#">
+            <a className="menu-link" href="#" onClick={toggleMenu}>
             Home
             </a>
-            <a className="menu-link" href="#tokenomics">
+            <a className="menu-link" href="#tokenomics" onClick={toggleMenu}>
             Tokenomics
             </a>
-            <a className="menu-link" href="#how_to_buy">
+            <a className="menu-link" href="#how_to_buy" onClick={toggleMenu}>
             How to buy?
             </a>
-            <a className="menu-link" href="#roadmap">
+            <Accordian
+            heading={"Projects"}
+            
+             />
+            <a className="menu-link" href="#roadmap" onClick={toggleMenu}>
             Roadmap
             </a>
         </div>
@@ -172,6 +286,7 @@ const Navbar = () => {
         </div>
 
     </div>
+    
   );
 };
 
