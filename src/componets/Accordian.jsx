@@ -23,12 +23,12 @@ const Accordian = ({ heading, text, index,setToggle,isToggled}) => {
             img:"airPad.svg"
 		},
 		{
-			name:"Gamming",
+			name:"Gaming",
 			href: ``,
             img:""
 		},
 		{
-			name:"Forest",
+			name:"NFT",
 			href: ``,
             img:""
 		}
@@ -100,7 +100,7 @@ const Accordian = ({ heading, text, index,setToggle,isToggled}) => {
                                     <div style={{
                                         width:"20px",
                                         height:"20px",
-                                        backgroundColor:"purple",
+                                        backgroundColor:link.name==="NFT"?"rgba(214, 117, 250, 1)":"rgba(255, 188, 109, 1)",
                                         borderRadius:"100%"
                                     }}>
                                     </div>

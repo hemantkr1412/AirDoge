@@ -147,6 +147,10 @@
     font-family: 'Bubblegum Sans', Helvetica, sans-serif;
   }
 
+  #dropdown-heading-hover:hover{
+    color: blue;
+  }
+
 
 /* 
   .dropdown-content {

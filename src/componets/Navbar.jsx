@@ -148,7 +148,7 @@ const Navbar = () => {
           }}>
               <img src="AMIcon.svg" alt="airpad icon" />
               <div className="dropdown-heading">
-                <div>
+                <div id="dropdown-heading-hover">
                 AirDao Markets
                 </div>
                 <div className="dropdwon-subheading">
