@@ -1,0 +1,140 @@
+/* App Container */
+.nft {
+    text-align: center;
+    background-color: #03011F;
+    min-height: 100vh;
+    padding: 20px;
+    color: white;
+}
+
+/* Title */
+.title2 {
+    margin-top: 5rem;
+    font-size: 3rem;
+    background: linear-gradient(90deg, #00F5FF 0%, #FF77E9 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    margin-bottom: 20px;
+}
+
+/* Grid Layout */
+.nft-grid {
+    display: flex;
+    /* grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 20px; */
+    justify-content: center;
+    align-items: center;
+}
+
+/* NFT Card */
+.nft-card {
+    background-color: #03011F;
+
+    border-radius: 12px;
+    padding: 20px;
+    box-shadow: 3px 4px 8px rgba(255, 254, 254, 0.418);
+    text-align: left;
+    border: 2px solid;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    max-width: 440px;
+    min-height: 480px;
+}
+
+.nft-card-loading {
+    background-color: white;
+
+    border-radius: 12px;
+    padding: 20px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    text-align: left;
+    border: 2px solid;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    max-width: 440px;
+    min-height: 480px;
+}
+
+.nft-image {
+    width: 150px;
+    height: 150px;
+    border-radius: 50%;
+    margin-bottom: 10px;
+}
+
+.nft-details {
+    display: flex;
+    /* justify-content: space-between; */
+    gap: 2rem;
+}
+
+.nft-details p {
+    margin: 5px 0;
+    font-size: 1.3rem;
+}
+
+.nft-card-loading p {
+    color: #03011F;
+    font-size: 1.3rem;
+}
+
+.progress-bar {
+    background-color: white;
+    border-radius: 8px;
+    overflow: hidden;
+    margin-top: 10px;
+    height: 15px;
+    width: 90%;
+}
+
+.progress {
+    background: linear-gradient(90deg, #FFF 0%, #13104E 100%);
+    height: 10px;
+    border-radius: 8px;
+    height: 15px;
+}
+
+/* Mint Button */
+.mint-button {
+    /* background-color: #5E17EB; */
+    background: linear-gradient(92.69deg, #1926FF 0.2%, #070245 99.8%);
+    color: white;
+    padding: 12px 22px;
+    border: none;
+    border-radius: 20px;
+    cursor: pointer;
+    font-size: 1.3rem;
+    margin-top: 20px;
+    /* margin-bottom: 20px; */
+    transition: background-color 0.3s ease;
+}
+
+.mint-button:hover {
+    background-color: #7F39FB;
+}
+
+
+
+/* Responsive */
+@media (max-width: 768px) {
+    .title {
+        font-size: 1.5rem;
+    }
+
+    .nft-grid {
+        grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    }
+
+    .nft-card {
+        padding: 15px;
+    }
+
+    .mint-button {
+        padding: 8px 15px;
+        font-size: 0.9rem;
+    }
+}

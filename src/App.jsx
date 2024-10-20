@@ -1,18 +1,24 @@
 import { useEffect, useState } from 'react'
 import './App.css';
-import Hero from './componets/Hero';
-import Tokenomics from './componets/Tokenomics';
-import Howtobuy from './componets/HowToBuy';
-import Roadmap from './componets/RoadMap';
 import Navbar from './componets/Navbar';
 import Footer from './componets/Footer';
 import GoogleTagManager from '../googleAnalytics';
+import Home from './componets/Home';
+import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
+import NFT from './componets/NFT/NFT';
+import { ThirdwebProvider } from "thirdweb/react";
+import ViewNFT from './componets/NFT/ViewNFT';
+import AccountProvider from './context/AccountContext';
 
 function App() {
+
+
+
+
   const [dogeData, setDogeData] = useState(
     {
       price_in_usdt: "Loading..",
-      curr_tokens_burnt:"Loading..",
+      curr_tokens_burnt: "Loading..",
       current_supply: "Loading..",
       market_cap: "Loading.."
     }
@@ -40,7 +46,7 @@ function App() {
           throw new Error('Failed to fetch data');
         }
         const data = await response.json();
-        
+
         // Format the numbers
         data.curr_tokens_burnt = formatNumber(data.curr_tokens_burnt);
         data.current_supply = formatNumber(data.current_supply);
@@ -59,16 +65,41 @@ function App() {
 
 
   return (
-    <div>
-      <GoogleTagManager />
-      <Navbar />
-      <Hero dogeData={dogeData} />
-      <Tokenomics />
-      <Howtobuy />
-      <Roadmap />
-      <Footer />
-    </div>
+    <ThirdwebProvider>
+      <AccountProvider>
+        <div>
+          <GoogleTagManager />
+          <Router>
+            <Navbar />
+            <Routes>
+              <Route
+                path="/"
+                element={
+                  <Home dogeData={dogeData} />
+                }
+              />
+              <Route
+                path="/nft"
+                element={
+                  <NFT />
+                }
+              />
+              <Route
+                path="/nftview"
+                element={
+                  <ViewNFT />
+                }
+              />
+            </Routes>
+
+            <Footer />
+          </Router>
+        </div>
+      </AccountProvider>
+    </ThirdwebProvider>
   )
 }
 
-export default App
+export default App;
+
+
