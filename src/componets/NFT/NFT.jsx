@@ -118,7 +118,7 @@ const NFT = () => {
 
     const priceInEth = "1"; // Assuming the price is 0.1 AMB
     const nftContractAddress = "0xb81562A64A6f1CDA748f88DAb3410d2840346413"; // Replace with your contract address
-    const totalSupply = "10";
+    const totalSupply = "1000";
 
     const { account, provider, signer, chainId } = useContext(AccountContext);
 
