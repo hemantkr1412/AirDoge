@@ -22,8 +22,8 @@ const Hero = ({ dogeData }) => {
                                 <div class="info-value">${dogeData.price_in_usdt}</div>
                             </div>
                             <div class="info-box">
-                                <div class="info-title">Market Cap</div>
-                                <div class="info-value">${dogeData.market_cap}</div>
+                                <div class="info-title">Current Supply</div>
+                                <div class="info-value">${dogeData.current_supply}</div>
                             </div>
                             <div class="info-box">
                                 <div class="info-title">Tokens Burned</div>
@@ -46,8 +46,8 @@ const Hero = ({ dogeData }) => {
                                 marginTop: "1rem"
                             }}>
                                 <div class="info-box">
-                                    <div class="info-title">Market Cap</div>
-                                    <div class="info-value">${dogeData.market_cap}</div>
+                                    <div class="info-title">Current Supply</div>
+                                    <div class="info-value">${dogeData.current_supply}</div>
                                 </div>
                                 <div class="info-box">
                                     <div class="info-title">Tokens Burned</div>
