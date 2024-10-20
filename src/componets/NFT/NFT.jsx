@@ -160,7 +160,7 @@ const NFT = () => {
         const tokenId = await fetchCurrentTokenId(signer); //1
         if (tokenId <= totalSupply) {
             try {
-                const toastId = toast.info("Please Wait ! Tx is processing...", {
+                var toastId = toast.info("Please Wait ! Tx is processing...", {
                     theme: "colored",
                     autoClose: false,
                 })
@@ -188,6 +188,7 @@ const NFT = () => {
                 await fetchCurrentTokenId(signer);
             } catch (error) {
                 toast.error("Something went wrong! ");
+                toast.dismiss(toastId);
                 console.error("Error during minting:", error);
             } finally {
                 setLoading(false);

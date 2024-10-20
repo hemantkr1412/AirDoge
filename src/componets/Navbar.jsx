@@ -454,8 +454,20 @@ const NavbarNFT = () => {
           <a className="menu-link" href="#" onClick={toggleMenu}>
             Home
           </a>
-          <a className="menu-link" onClick={toggleMenu}>
+          <a className="menu-link" onClick={
+            () => {
+              navigate("/nft")
+              toggleMenu()
+            }
+          }>
             Mint
+          </a>
+          <a className="menu-link" onClick={() => {
+            navigate("/nftview")
+            toggleMenu()
+          }
+          }>
+            View
           </a>
 
         </div>
@@ -475,9 +487,9 @@ const NavbarNFT = () => {
         <div onClick={() => navigate("/nft")} className="subNavbarItem">
           Mint
         </div >
-        {/* <div onClick={() => navigate("/nftview")} className="subNavbarItem">
+        <div onClick={() => navigate("/nftview")} className="subNavbarItem">
           View
-        </div> */}
+        </div>
         <GradientButton />
 
         <ConnectButton
