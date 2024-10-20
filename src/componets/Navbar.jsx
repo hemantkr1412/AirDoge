@@ -454,7 +454,7 @@ const NavbarNFT = () => {
           <a className="menu-link" href="#" onClick={toggleMenu}>
             Home
           </a>
-          <a className="menu-link" href="#tokenomics" onClick={toggleMenu}>
+          <a className="menu-link" onClick={toggleMenu}>
             Mint
           </a>
 
@@ -469,9 +469,9 @@ const NavbarNFT = () => {
         alignItems: "center",
         // marginTop: "1rem"
       }}>
-        <div className="subNavbarItem" onClick={() => navigate('/')}>
+        <Link to={"/"} className="subNavbarItem" >
           Home
-        </div >
+        </Link >
         <div onClick={() => navigate("/nft")} className="subNavbarItem">
           Mint
         </div >

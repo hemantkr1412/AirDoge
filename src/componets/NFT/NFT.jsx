@@ -4,6 +4,7 @@ import { ethers } from "ethers";
 import { AccountContext } from '../../context/AccountContext';
 import { toast, ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import { FaCopy } from 'react-icons/fa';
 
 
 // NFT Contract ABI
@@ -14,7 +15,7 @@ const nftAbi = [
 ];
 
 
-const NFTCard = ({ loading, currentTokenId, totalSupply, priceInEth, handleMint }) => {
+const NFTCard = ({ loading, currentTokenId, totalSupply, priceInEth, handleMint, nftContractAddress }) => {
 
     const progress = ((currentTokenId - 1) / totalSupply) * 100
 
@@ -23,6 +24,20 @@ const NFTCard = ({ loading, currentTokenId, totalSupply, priceInEth, handleMint 
     `https://xenplay.s3.ap-south-1.amazonaws.com/adogenfttest/${currentTokenId}.png`
 
     const url = currentTokenId <= 500 ? "https://adoge-nft.s3.ap-south-1.amazonaws.com/adoge-batch-1/" : "https://adoge-nft-2.s3.ap-south-1.amazonaws.com/adoge-batch-2/";
+
+    const [copySuccess, setCopySuccess] = useState('');
+
+    const copyToClipboard = () => {
+        navigator.clipboard.writeText(nftContractAddress)
+            .then(() => {
+                setCopySuccess('Copied');
+                setTimeout(() => setCopySuccess(''), 2000); // Hide message after 2 seconds
+            })
+            .catch(err => {
+                setCopySuccess('Failed to copy!');
+                setTimeout(() => setCopySuccess(''), 2000); // Hide message after 2 seconds
+            });
+    };
 
     return (
         <div className="nft-card">
@@ -47,12 +62,24 @@ const NFTCard = ({ loading, currentTokenId, totalSupply, priceInEth, handleMint 
                     <p>In Progress</p>
                 </div>
             </div>
+            <p style={{
+                fontSize: "0.7rem"
+            }}>CA :{nftContractAddress}</p>
+            <div className="tokenomics-ca-copy-icon" onClick={copyToClipboard} style={{ cursor: 'pointer', marginLeft: '10px' }}>
+                <FaCopy />
+            </div>
+            {copySuccess && (
+                <div className="copy-notification" style={{ color: 'green', marginTop: '10px', fontFamily: "1rem", fontWeight: "700" }}>
+                    {copySuccess}
+                </div>
+            )}
             <div className="progress-bar">
                 <div className="progress" style={{ width: `${progress}%` }}></div>
             </div>
             <p style={{
                 marginTop: "10px"
             }}>Mint : {currentTokenId - 1}/{totalSupply}</p>
+
             <button
                 disabled={
                     loading || currentTokenId === null || currentTokenId > totalSupply
@@ -191,7 +218,7 @@ const NFT = () => {
                 {currentTokenId < 0 || currentTokenId === null || chainId != 16718 || !account ?
                     <>
                         <NFTLoading account={account} />
-                    </> : <NFTCard loading={loading} currentTokenId={currentTokenId} totalSupply={totalSupply} priceInEth={priceInAMB} handleMint={handleMint} />}
+                    </> : <NFTCard loading={loading} currentTokenId={currentTokenId} totalSupply={totalSupply} priceInEth={priceInAMB} handleMint={handleMint} nftContractAddress={nftContractAddress} />}
 
             </div>
 
