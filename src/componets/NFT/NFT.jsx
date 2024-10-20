@@ -3,6 +3,8 @@ import './Nft.css';
 import { ethers } from "ethers";
 import { AccountContext } from '../../context/AccountContext';
 import { toast, ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+
 
 // NFT Contract ABI
 const nftAbi = [
@@ -88,7 +90,7 @@ const NFT = () => {
 
 
     const priceInEth = "1"; // Assuming the price is 0.1 AMB
-    const nftContractAddress = "0xf44c347afd2EfC602562C5fD14D3F13BfD8F0F5e"; // Replace with your contract address
+    const nftContractAddress = "0xc0225f41138bA992AA857F8F56DCBFe8eF7d13c8"; // Replace with your contract address
     const totalSupply = "10";
 
     const { account, provider, signer, chainId } = useContext(AccountContext);
@@ -131,6 +133,10 @@ const NFT = () => {
         const tokenId = await fetchCurrentTokenId(signer); //1
         if (tokenId <= totalSupply) {
             try {
+                const toastId = toast.info("Please Wait ! Tx is processing...", {
+                    theme: "colored",
+                    autoClose: false,
+                })
                 setLoading(true);
                 const nftContract = new ethers.Contract(nftContractAddress, nftAbi, signer);
                 const userAddress = await signer.getAddress();
@@ -145,6 +151,7 @@ const NFT = () => {
                 await tx.wait(); // Wait for minting transaction to complete
 
                 console.log("NFT minted successfully!");
+                toast.dismiss(toastId);
                 toast.success("NFT minted successfully!", {
                     autoClose: 5000,
                     theme: "colored",
@@ -153,6 +160,7 @@ const NFT = () => {
                 // Optionally, fetch the next token ID after minting
                 await fetchCurrentTokenId(signer);
             } catch (error) {
+                toast.error("Something went wrong! ");
                 console.error("Error during minting:", error);
             } finally {
                 setLoading(false);

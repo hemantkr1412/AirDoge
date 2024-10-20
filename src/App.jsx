@@ -4,7 +4,7 @@ import Navbar from './componets/Navbar';
 import Footer from './componets/Footer';
 import GoogleTagManager from '../googleAnalytics';
 import Home from './componets/Home';
-import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
+import { HashRouter as Router, Route, Routes } from "react-router-dom";
 import NFT from './componets/NFT/NFT';
 import { ThirdwebProvider } from "thirdweb/react";
 import ViewNFT from './componets/NFT/ViewNFT';
