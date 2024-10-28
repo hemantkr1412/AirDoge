@@ -9,10 +9,10 @@ const Footer = () => {
           <img src={"/footerlogo.svg"} alt="" />
         </div>
         <div className="footer-right">
-          <img onClick={() =>{
+          <img onClick={() => {
             window.open("https://x.com/AirDogeBarks")
           }} className="frame" alt="Frame" src="Xicon.svg" />
-          <img onClick={() =>{
+          <img onClick={() => {
             window.open("https://t.me/+eOkt0nyuxWthYjE9")
           }} className="frame" alt="Frame" src="TeliIcon.svg" />
           {/* <div className="buy-container2">
@@ -23,8 +23,8 @@ const Footer = () => {
         </div>
       </div>
       <div>
-      <p className="disclaimer">
-            Disclaimer :$ADOGE is a meme token made for fun
+        <p className="disclaimer">
+          Disclaimer :$ADG is a meme token made for fun
         </p>
         <p className="copyRight">&copy; <span id="year">2024</span> AirDoge. All rights reserved.</p>
       </div>
