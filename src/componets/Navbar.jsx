@@ -42,6 +42,8 @@ const Navbar = () => {
   const [isNFTNavbar, setIsNFTNavbar] = useState(false)
 
   const location = useLocation();
+  const navigate = useNavigate();
+
 
   useEffect(() => {
     if (containsNFT) {
@@ -56,7 +58,7 @@ const Navbar = () => {
   // console.log(location);
 
   // Check if any query param contains the word 'nft'
-  const containsNFT = location.pathname.toLowerCase().includes('nft');
+  const containsNFT = location.pathname.toLowerCase().includes('nft') || location.pathname.toLowerCase().includes('fundraiser');
 
   // console.log(containsNFT);
 
@@ -349,7 +351,8 @@ const Navbar = () => {
             {/* BuyDoge Button */}
             <div class="buy-container">
               <div onClick={() => {
-                window.open("https://star-fleet.io/astra/swap")
+                // window.open("https://star-fleet.io/astra/swap")
+                navigate("/fundraiser")
               }} class="buy-text">
                 Buy $ADOGE
               </div>
@@ -456,6 +459,14 @@ const NavbarNFT = () => {
           </a>
           <a className="menu-link" onClick={
             () => {
+              navigate("/fundraiser")
+              toggleMenu()
+            }
+          }>
+            ADG Sale
+          </a>
+          <a className="menu-link" onClick={
+            () => {
               navigate("/nft")
               toggleMenu()
             }
@@ -484,6 +495,9 @@ const NavbarNFT = () => {
         <Link to={"/"} className="subNavbarItem" >
           Home
         </Link >
+        <div onClick={() => navigate("/fundraiser")} className="subNavbarItem">
+          ADG Sale
+        </div >
         <div onClick={() => navigate("/nft")} className="subNavbarItem">
           Mint
         </div >

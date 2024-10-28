@@ -1,0 +1,43 @@
+.fund {
+    text-align: center;
+    background-color: #03011F;
+    min-height: 100vh;
+    padding: 20px;
+    color: white;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+
+.sub-title {
+    font-size: 1rem;
+}
+
+.fund-btn {
+    margin-top: 1rem;
+    width: 150px;
+    height: 42px;
+    gap: 10px;
+    border: 1px 0px 0px 0px;
+    opacity: 0px;
+    border-radius: 10px;
+    background: linear-gradient(92.69deg, #1926FF 0.2%, #070245 99.8%);
+    border: 0.5px solid;
+}
+
+
+.fund-box {
+    background-color: rgba(255, 255, 255, 0.1);
+    /* bg-[#d4d4d433] */
+    border-radius: 20px;
+    /* border: 3px solid black; */
+    /* box-shadow: 5px 8px 4px #000000; */
+    backdrop-filter: blur(20px);
+}
+
+@media (max-width: 768px) {
+    .sub-title {
+        font-size: 0.7rem;
+    }
+}

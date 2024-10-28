@@ -1,0 +1,31 @@
+.game {
+    text-align: center;
+    background-color: #03011F;
+    min-height: 100vh;
+    padding: 20px;
+    color: white;
+}
+
+.get-btn {
+    margin-top: 1rem;
+    width: 250px;
+    height: 52px;
+    gap: 10px;
+    border: 1px 0px 0px 0px;
+    opacity: 0px;
+    border-radius: 10px;
+    background: linear-gradient(92.69deg, #1926FF 0.2%, #070245 99.8%);
+    border: 0.5px solid;
+}
+
+.guess-btn {
+    /* margin-top: 0.2rem; */
+    width: 150px;
+    height: 52px;
+    /* gap: 10px; */
+    border: 1px 0px 0px 0px;
+    opacity: 0px;
+    border-radius: 10px;
+    background: linear-gradient(92.69deg, #1926FF 0.2%, #070245 99.8%);
+    border: 0.5px solid;
+}

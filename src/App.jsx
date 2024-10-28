@@ -9,6 +9,8 @@ import NFT from './componets/NFT/NFT';
 import { ThirdwebProvider } from "thirdweb/react";
 import ViewNFT from './componets/NFT/ViewNFT';
 import AccountProvider from './context/AccountContext';
+import Game from './componets/Game/Game';
+import FundRaiser from './componets/FundRaiser/FundRaiser';
 
 function App() {
 
@@ -88,6 +90,18 @@ function App() {
                 path="/nftview"
                 element={
                   <ViewNFT />
+                }
+              />
+              <Route
+                path="/nftgame"
+                element={
+                  <Game />
+                }
+              />
+              <Route
+                path="/fundraiser"
+                element={
+                  <FundRaiser />
                 }
               />
             </Routes>

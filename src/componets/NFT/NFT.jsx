@@ -256,3 +256,5 @@ const NFTLoading = ({ account }) => {
         </div>
     );
 };
+
+export { NFTLoading };
