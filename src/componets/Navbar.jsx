@@ -354,7 +354,7 @@ const Navbar = () => {
                 // window.open("https://star-fleet.io/astra/swap")
                 navigate("/fundraiser")
               }} class="buy-text">
-                Buy $ADOGE
+                Buy $ADG
               </div>
             </div>
 
@@ -560,7 +560,7 @@ const GradientButton = () => {
     <button className="gradient-button" onClick={() => {
       window.open("https://airdoge.xyz", '_blank')
     }}>
-      Buy $ADOGE
+      Buy $ADG
     </button>
   );
 };

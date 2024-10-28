@@ -95,7 +95,7 @@ const FundRaiser = () => {
 
             await tx.wait();
             setMessage({
-                text: "Contribution successful! Thank you for supporting.",
+                text: "Contribution successful! Thank you for support.",
                 color: "green"
             });
         } catch (error) {
