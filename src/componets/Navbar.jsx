@@ -241,7 +241,7 @@ const Navbar = () => {
                         NFT
                       </div>
                       <div className="dropdwon-subheading">
-                        $ADOGE Utility NFTs
+                        $ADG Utility NFTs
                       </div>
                     </Link>
                   </div>
