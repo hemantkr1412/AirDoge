@@ -19,13 +19,13 @@ const Hero = ({ dogeData }) => {
                         <div class="info-container">
                             <div class="info-box">
                                 <div class="info-title">Price</div>
-                                {/* <div class="info-value">${dogeData.price_in_usdt}</div> */}
-                                <div class="info-value">Nil</div>
+                                <div class="info-value">${dogeData.price_in_usdt}</div>
+                                {/* <div class="info-value">Nil</div> */}
                             </div>
                             <div class="info-box">
                                 <div class="info-title">Current Supply</div>
-                                {/* <div class="info-value">${dogeData.current_supply}</div> */}
-                                <div class="info-value">Nil</div>
+                                <div class="info-value">${dogeData.current_supply}</div>
+                                {/* <div class="info-value">Nil</div> */}
                             </div>
                             <div class="info-box">
                                 <div class="info-title">Total Supply</div>
@@ -38,8 +38,8 @@ const Hero = ({ dogeData }) => {
                             }}>
                                 <div class="info-box">
                                     <div class="info-title">Price</div>
-                                    {/* <div class="info-value">${dogeData.price_in_usdt}</div> */}
-                                    <div class="info-value">Nil</div>
+                                    <div class="info-value">${dogeData.price_in_usdt}</div>
+                                    {/* <div class="info-value">Nil</div> */}
                                 </div>
                             </div>
                             <div style={{
@@ -50,8 +50,8 @@ const Hero = ({ dogeData }) => {
                             }}>
                                 <div class="info-box">
                                     <div class="info-title">Current Supply</div>
-                                    {/* <div class="info-value">${dogeData.current_supply}</div> */}
-                                    <div class="info-value">Nil</div>
+                                    <div class="info-value">${dogeData.current_supply}</div>
+                                    {/* <div class="info-value">Nil</div> */}
                                 </div>
                                 <div class="info-box">
                                     <div class="info-title">Total Supply</div>
