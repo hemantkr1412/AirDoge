@@ -11,6 +11,7 @@ import ViewNFT from './componets/NFT/ViewNFT';
 import AccountProvider from './context/AccountContext';
 import Game from './componets/Game/Game';
 import FundRaiser from './componets/FundRaiser/FundRaiser';
+import GameReward from './componets/Game/GameReward';
 
 function App() {
 
@@ -99,11 +100,17 @@ function App() {
                 }
               />
               <Route
+                path="/nftgamereward"
+                element={
+                  <GameReward />
+                }
+              />
+              {/* <Route
                 path="/fundraiser"
                 element={
                   <FundRaiser />
                 }
-              />
+              /> */}
             </Routes>
 
             <Footer />

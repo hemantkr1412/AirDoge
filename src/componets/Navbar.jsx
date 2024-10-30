@@ -351,8 +351,8 @@ const Navbar = () => {
             {/* BuyDoge Button */}
             <div class="buy-container">
               <div onClick={() => {
-                // window.open("https://star-fleet.io/astra/swap")
-                navigate("/fundraiser")
+                window.open("https://star-fleet.io/astra/swap")
+                // navigate("/fundraiser")
               }} class="buy-text">
                 Buy $ADG
               </div>
@@ -457,14 +457,14 @@ const NavbarNFT = () => {
           <a className="menu-link" href="#" onClick={toggleMenu}>
             Home
           </a>
-          <a className="menu-link" onClick={
+          {/* <a className="menu-link" onClick={
             () => {
               navigate("/fundraiser")
               toggleMenu()
             }
           }>
             ADG Sale
-          </a>
+          </a> */}
           <a className="menu-link" onClick={
             () => {
               navigate("/nft")
@@ -495,9 +495,9 @@ const NavbarNFT = () => {
         <Link to={"/"} className="subNavbarItem" >
           Home
         </Link >
-        <div onClick={() => navigate("/fundraiser")} className="subNavbarItem">
+        {/* <div onClick={() => navigate("/fundraiser")} className="subNavbarItem">
           ADG Sale
-        </div >
+        </div > */}
         <div onClick={() => navigate("/nft")} className="subNavbarItem">
           Mint
         </div >
@@ -558,7 +558,7 @@ export { NavbarNFT };
 const GradientButton = () => {
   return (
     <button className="gradient-button" onClick={() => {
-      window.open("https://airdoge.xyz", '_blank')
+      window.open("https://star-fleet.io/astra/swap", '_blank')
     }}>
       Buy $ADG
     </button>
