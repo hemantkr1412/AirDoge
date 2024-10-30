@@ -21,7 +21,6 @@ function App() {
   const [dogeData, setDogeData] = useState(
     {
       price_in_usdt: "Loading..",
-      curr_tokens_burnt: "Loading..",
       current_supply: "Loading..",
       market_cap: "Loading.."
     }
@@ -51,7 +50,7 @@ function App() {
         const data = await response.json();
 
         // Format the numbers
-        data.curr_tokens_burnt = formatNumber(data.curr_tokens_burnt);
+
         data.current_supply = formatNumber(data.current_supply);
         data.market_cap = formatNumber(data.market_cap);
 
