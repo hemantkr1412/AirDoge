@@ -34,7 +34,8 @@ const Game = () => {
             setAttemp(0)
 
             // Step 1: Send POST request to /account/ to get account_id
-            const accountResponse = await fetch("http://127.0.0.1:8000/api/v1/user/account/", {
+
+            const accountResponse = await fetch("https://airdaomarkets.xyz/api/v1/user/account/", {
                 method: "POST",
                 headers: {
                     "Content-Type": "application/json"
@@ -53,7 +54,7 @@ const Game = () => {
             setAccountId(accountId)
 
             // Step 2: Send POST request to /game/start-game/ with the account_id
-            const gameResponse = await fetch("http://127.0.0.1:8000/api/v1/game/start-game/", {
+            const gameResponse = await fetch("https://airdaomarkets.xyz/api/v1/game/start-game/", {
                 method: "POST",
                 headers: {
                     "Content-Type": "application/json"
@@ -80,7 +81,7 @@ const Game = () => {
     const handleGuess = async () => {
         try {
             setLoading(true)
-            const accountResponse = await fetch(`http://127.0.0.1:8000/api/v1/game/guess/${gameId}/`, {
+            const accountResponse = await fetch(`https://airdaomarkets.xyz/api/v1/game/guess/${gameId}/`, {
                 method: "POST",
                 headers: {
                     "Content-Type": "application/json"
