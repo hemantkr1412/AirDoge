@@ -14,25 +14,25 @@ import { ethers } from "ethers";
 const wallets = [createWallet("io.metamask")
 ];
 
-// const chain = defineChain({
-//   id: 22040,
-//   rpc: "https://network.ambrosus-test.io",
-//   nativeCurrency: {
-//     name: "AirDAO Testnat",
-//     symbol: "AMB",
-//     decimals: 18,
-//   },
-// });
-
 const chain = defineChain({
-  id: 16718,
-  rpc: "https://network.ambrosus.io",
+  id: 22040,
+  rpc: "https://network.ambrosus-test.io",
   nativeCurrency: {
-    name: "AirDAO Mainnet",
+    name: "AirDAO Testnat",
     symbol: "AMB",
     decimals: 18,
   },
 });
+
+// const chain = defineChain({
+//   id: 16718,
+//   rpc: "https://network.ambrosus.io",
+//   nativeCurrency: {
+//     name: "AirDAO Mainnet",
+//     symbol: "AMB",
+//     decimals: 18,
+//   },
+// });
 
 
 // import BuyDoge from "./Buydoge";
@@ -200,9 +200,9 @@ const Navbar = () => {
                     }}>
                     </div>
                     <div className="dropdown-heading">
-                      <div>
+                      <Link to="/nftgame">
                         Gaming
-                      </div>
+                      </Link>
                       <div className="dropdwon-subheading">
                         On-chain mini games
                       </div>
@@ -457,14 +457,22 @@ const NavbarNFT = () => {
           <a className="menu-link" href="#" onClick={toggleMenu}>
             Home
           </a>
-          {/* <a className="menu-link" onClick={
+          <a className="menu-link" onClick={
             () => {
-              navigate("/fundraiser")
+              navigate("/nftgame")
               toggleMenu()
             }
           }>
-            ADG Sale
-          </a> */}
+            Game
+          </a>
+          <a className="menu-link" onClick={
+            () => {
+              navigate("/nftgamerewrd")
+              toggleMenu()
+            }
+          }>
+            Game Reward
+          </a>
           <a className="menu-link" onClick={
             () => {
               navigate("/nft")
@@ -495,9 +503,12 @@ const NavbarNFT = () => {
         <Link to={"/"} className="subNavbarItem" >
           Home
         </Link >
-        {/* <div onClick={() => navigate("/fundraiser")} className="subNavbarItem">
-          ADG Sale
-        </div > */}
+        <div onClick={() => navigate("/nftgame")} className="subNavbarItem">
+          Game
+        </div >
+        <div onClick={() => navigate("/nftgamereward")} className="subNavbarItem">
+          Game Reward
+        </div >
         <div onClick={() => navigate("/nft")} className="subNavbarItem">
           Mint
         </div >

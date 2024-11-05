@@ -5,6 +5,7 @@ import { useState } from 'react';
 import Lottie from "lottie-react";
 import animationData from "./Animation.json";
 import { useEffect } from 'react';
+import { NFTLoading } from "../NFT/NFT";
 const Game = () => {
     const [gameId, setGameId] = useState();
     const [guessNumber, setGuessNumber] = useState();
@@ -23,10 +24,14 @@ const Game = () => {
             return () => clearTimeout(timer); // Cleanup the timer on component unmount
         }
 
-    }, [message]);
+    }, [message, gameId]);
 
     const handleGetStarted = async () => {
         try {
+
+            setMessage('');
+            setAttempNumberList([])
+            setAttemp(0)
 
             // Step 1: Send POST request to /account/ to get account_id
             const accountResponse = await fetch("http://127.0.0.1:8000/api/v1/user/account/", {
@@ -58,6 +63,7 @@ const Game = () => {
 
             if (!gameResponse.ok) {
                 console.error("Error starting game:", gameResponse.statusText);
+                setMessage("error")
                 return;
             }
 
@@ -132,80 +138,98 @@ const Game = () => {
 
     return (
         <div className="game">
-            <h1 className="title2">Guess My Number</h1>
-            <p>Guess a random number</p>
-            <p>1 to 100</p>
+            {
+                !account ? <>
+                    <h1 className="title2">Guess My Number</h1>
+                    <NFTLoading account={account} />
+                </> : <>
+                    <h1 className="title2">Guess My Number</h1>
+                    <p>Guess a random number</p>
+                    <p>1 to 100</p>
+                    {message === "error" && <p style={{
+                        color: "red"
+                    }}>Something went Wrong !</p>}
+                    <div>
+                        {
+                            gameId ?
+                                <div style={{
+                                    marginTop: "1rem",
+                                    display: "flex",
+                                    justifyContent: "center",
+                                    alignItems: "center",
+                                    flexDirection: "column",
+                                    gap: "2rem"
+                                }}>
+                                    {
+                                        (attepNumberList.length === 6 && message !== "congratulations") && <p style={{
+                                            color: "red"
+                                        }}>ohhoo ! You lost Please Try Again</p>
+                                    }
+                                    {
+                                        message === "low" && <p style={{
+                                            color: "red"
+                                        }}>Your Number is less than Random Number</p>
+                                    }
+                                    {
+                                        message === "high" && <p style={{
+                                            color: "yellow"
+                                        }}>Your Number is Greater than Random Number</p>
+                                    }
+                                    {
+                                        message === "congratulations" && <p style={{
+                                            color: "green"
+                                        }}> Congratulations !! You $ADG won </p>
+                                    }
+                                    <GameGrid
+                                        attemp={attemp}
+                                        guessNumber={guessNumber}
+                                        setGuessNumber={setGuessNumber}
+                                        attepNumberList={attepNumberList}
+                                        setAttempNumberList={setAttempNumberList}
+                                        message={message}
+                                        setMessage={setMessage}
+                                    />
+                                    {
+                                        message === "congratulations" && showAnimation &&
+                                        <Lottie
+                                            animationData={animationData}
+                                            loop={true}
+                                            style={{
+                                                width: "100%",
+                                                height: 500,
+                                                position: 'absolute',
+                                                top: '30%',  /* Adjust top margin as needed */
+                                                left: '50%',
+                                                transform: 'translateX(-50%)',
+                                                zIndex: 10
+                                            }}
+                                        />
+                                    }
 
-            <div>
-                {
-                    gameId ?
-                        <div style={{
-                            marginTop: "1rem",
-                            display: "flex",
-                            justifyContent: "center",
-                            alignItems: "center",
-                            flexDirection: "column",
-                            gap: "2rem"
-                        }}>
-                            {
-                                message === "low" && <p style={{
-                                    color: "red"
-                                }}>Your Number is less than Random Number</p>
-                            }
-                            {
-                                message === "high" && <p style={{
-                                    color: "yellow"
-                                }}>Your Number is Greater than Random Number</p>
-                            }
-                            {
-                                message === "congratulations" && <p style={{
-                                    color: "green"
-                                }}> Congratulations !! You 100 $ADOGE won </p>
-                            }
-                            <GameGrid
-                                attemp={attemp}
-                                guessNumber={guessNumber}
-                                setGuessNumber={setGuessNumber}
-                                attepNumberList={attepNumberList}
-                                setAttempNumberList={setAttempNumberList}
-                                message={message}
-                                setMessage={setMessage}
-                            />
-                            {
-                                message === "congratulations" && showAnimation &&
-                                <Lottie
-                                    animationData={animationData}
-                                    loop={true}
-                                    style={{
-                                        width: "100%",
-                                        height: 500,
-                                        position: 'absolute',
-                                        top: '30%',  /* Adjust top margin as needed */
-                                        left: '50%',
-                                        transform: 'translateX(-50%)',
-                                        zIndex: 10
-                                    }}
-                                />
-                            }
+                                    <button className='guess-btn' onClick={() => {
+                                        if (attepNumberList.length === 6) {
+                                            setGameId('')
+                                            handleGetStarted()
+                                        }
+                                        else if (message === "congratulations") {
+                                            setGameId("")
+                                            handleGetStarted()
+                                        } else {
+                                            handleGuess()
+                                        }
+                                    }
+                                    } >{
+                                            loading ? "Please wait ..." : (
+                                                message === "congratulations" ? "Try Again!" : attepNumberList.length === 6 ? "Try Again" : "Guess"
+                                            )
+                                        }</button>
+                                </div> :
+                                <button className='get-btn' onClick={handleGetStarted}>Get Started</button>
+                        }
 
-                            <button className='guess-btn' onClick={() => {
-                                if (message === "congratulations") {
-                                    setGameId("")
-                                    handleGetStarted()
-                                } else {
-                                    handleGuess()
-                                }
-                            }
-                            } >{
-                                    loading ? "Please wait ..." : (
-                                        message === "congratulations" ? "Try Again!" : "Guess"
-                                    )
-                                }</button>
-                        </div> :
-                        <button className='get-btn' onClick={handleGetStarted}>Get Started</button>
-                }
-
-            </div>
+                    </div>
+                </>
+            }
 
 
         </div>

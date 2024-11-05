@@ -1,12 +1,18 @@
 import { ethers } from "ethers";
-import { useContext, useEffect } from "react";
+import { useContext, useEffect, useState } from "react";
 import { AccountContext } from "../../context/AccountContext";
+import { toast, ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 const GameReward = () => {
+
+    const [reward, setReward] = useState(0);
+    const [loading, setLoading] = useState(false);
 
 
     // const provider = new ethers.providers.JsonRpcProvider("https://network.ambrosus-test.io/);
     const { account, provider, signer, chainId } = useContext(AccountContext);
+
 
     // Initialize wallet (replace with your wallet's private key)
     // const wallet = new ethers.Wallet("YOUR_PRIVATE_KEY", provider);
@@ -19,7 +25,7 @@ const GameReward = () => {
         "function getUserReward(address user) external view returns (uint256)"
     ];
 
-    const contractAddress = "0x88940eB49cE63359655BEb92b7F2E4c8E0eDE3E9";
+    const contractAddress = "0x1cc09C256e66A7f5353aE0DCC9cE1291c0722499";
 
     // Initialize the contract
     const contract = new ethers.Contract(contractAddress, contractABI, signer);
@@ -27,23 +33,30 @@ const GameReward = () => {
     // Function to claim rewards
     async function claimRewards() {
         try {
+            setLoading(true)
             const tx = await contract.claimRewards();
             console.log("Transaction sent:", tx.hash);
             const receipt = await tx.wait();
             console.log("Transaction confirmed:", receipt);
+            toast.success("Transaction Successful ", {
+                autoClose: 5000,
+                theme: "colored",
+            });
+            setReward(0)
+            setLoading(false)
         } catch (error) {
             console.error("Error claiming rewards:", error);
+            setLoading(false)
         }
     }
 
     // Function to get user reward
     async function getUserReward(userAddress) {
-        // console.log(userAddress);
         try {
             const reward = await contract.getUserReward(userAddress);
-            // console.log(reward);
-            // console.log(ethers.utils.formatUnits(reward, 18), 'REWARD'); // Adjust decimals if necessary
-            return reward;
+            console.log(reward)
+            setReward(ethers.formatUnits(reward, 18))
+            // setReward(reward)
         } catch (error) {
             console.error("Error fetching reward:", error);
         }
@@ -53,22 +66,18 @@ const GameReward = () => {
 
     useEffect(() => {
         (async () => {
-            // Claim rewards for the connected wallet
-            // await claimRewards();
+            await getUserReward(account);
 
-            // Fetch reward for the connected wallet
-            // console.log(account)
-            const reward = await getUserReward(account);
-            if (reward && ethers.BigNumber.isBigNumber(reward)) {
-                console.log("Your reward:", ethers.utils.formatUnits(reward, 18));
-            } else {
-                console.error("Reward is either undefined or not a BigNumber:", reward);
-            }
-            // console.log("Your reward:", ethers.utils.formatUnits(reward, 18)); // Adjust decimals if necessary
-            const rewardBigNumber = ethers.BigNumber.from(reward);
-            console.log("Your reward:", ethers.utils.formatUnits(rewardBigNumber, 18));
         })();
-    }, [account])
+    }, [account, reward])
+
+
+
+    const handleClaim = async () => {
+        await claimRewards();
+    }
+
+
 
 
 
@@ -77,7 +86,33 @@ const GameReward = () => {
 
     return (
         <div className="game">
+            <ToastContainer />
+            <h1 className="title2">Game Reward</h1>
 
+            <div className="nft-grid">
+                <div className="fund-box" style={{
+                    display: "flex",
+                    flexDirection: "column",
+                    justifyContent: "center",
+                    alignItems: "center",
+                    marginTop: "1rem",
+                    gap: "1rem",
+                    width: "300px",
+                    height: "200px",
+                    WebkitBackdropFilter: "blur(10px)",
+                    border: "1px solid rgba(255, 255, 255, 0.2)",
+
+                }}>
+                    <div>
+                        <p>Total Rewards : {reward} ADG</p>
+                        <button onClick={handleClaim} disabled={
+                            reward == 0 ? true : loading ? true : false
+                        } className="fund-btn"> {
+                                loading ? "Please Wait ..." : "Claim Reward"
+                            } </button>
+                    </div>
+                </div>
+            </div>
         </div>
     )
 }
