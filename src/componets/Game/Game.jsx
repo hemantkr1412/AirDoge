@@ -142,7 +142,9 @@ const Game = () => {
             {
                 !account ? <>
                     <h1 className="title2">Guess My Number</h1>
-                    <NFTLoading account={account} />
+                    <div className="nft-grid">
+                        <NFTLoading account={account} />
+                    </div>
                 </> : <>
                     <h1 className="title2">Guess My Number</h1>
                     <p>Guess a random number</p>
