@@ -14,25 +14,25 @@ import { ethers } from "ethers";
 const wallets = [createWallet("io.metamask")
 ];
 
-const chain = defineChain({
-  id: 22040,
-  rpc: "https://network.ambrosus-test.io",
-  nativeCurrency: {
-    name: "AirDAO Testnat",
-    symbol: "AMB",
-    decimals: 18,
-  },
-});
-
 // const chain = defineChain({
-//   id: 16718,
-//   rpc: "https://network.ambrosus.io",
+//   id: 22040,
+//   rpc: "https://network.ambrosus-test.io",
 //   nativeCurrency: {
-//     name: "AirDAO Mainnet",
+//     name: "AirDAO Testnat",
 //     symbol: "AMB",
 //     decimals: 18,
 //   },
 // });
+
+const chain = defineChain({
+  id: 16718,
+  rpc: "https://network.ambrosus.io",
+  nativeCurrency: {
+    name: "AirDAO Mainnet",
+    symbol: "AMB",
+    decimals: 18,
+  },
+});
 
 
 // import BuyDoge from "./Buydoge";

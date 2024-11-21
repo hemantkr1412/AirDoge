@@ -25,7 +25,7 @@ const GameReward = () => {
         "function getUserReward(address user) external view returns (uint256)"
     ];
 
-    const contractAddress = "0x1cc09C256e66A7f5353aE0DCC9cE1291c0722499";
+    const contractAddress = "0x305962Ca7398ec6b966C9E2f60ad3A0e3FcDae49";
 
     // Initialize the contract
     const contract = new ethers.Contract(contractAddress, contractABI, signer);

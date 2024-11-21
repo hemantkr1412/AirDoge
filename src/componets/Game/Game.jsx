@@ -15,8 +15,14 @@ const Game = () => {
     const [message, setMessage] = useState('');
     const [loading, setLoading] = useState(false);
     const [showAnimation, setShowAnimation] = useState(true);
+    const [remaintime, setRemainTime] = useState("");
 
     const { account, provider, signer, chainId } = useContext(AccountContext);
+
+
+    // const localurl = "http://127.0.0.1:8000"
+    const localurl = "https://airdaomarkets.xyz"
+    const serverurl = "https://airdaomarkets.xyz"
 
     useEffect(() => {
         if (message === "congratulations") {
@@ -35,7 +41,7 @@ const Game = () => {
 
             // Step 1: Send POST request to /account/ to get account_id
 
-            const accountResponse = await fetch("https://airdaomarkets.xyz/api/v1/user/account/", {
+            const accountResponse = await fetch(`${localurl}/api/v1/user/account/`, {
                 method: "POST",
                 headers: {
                     "Content-Type": "application/json"
@@ -54,7 +60,7 @@ const Game = () => {
             setAccountId(accountId)
 
             // Step 2: Send POST request to /game/start-game/ with the account_id
-            const gameResponse = await fetch("https://airdaomarkets.xyz/api/v1/game/start-game/", {
+            const gameResponse = await fetch(`${localurl}/api/v1/game/start-game/`, {
                 method: "POST",
                 headers: {
                     "Content-Type": "application/json"
@@ -70,6 +76,9 @@ const Game = () => {
 
             const gameData = await gameResponse.json();
             console.log(gameData);
+            if (gameData?.time_remaining) {
+                setRemainTime(gameData.time_remaining)
+            }
             setGameId(gameData.game_id) // Handle or display game data as needed
 
         } catch (error) {
@@ -81,7 +90,7 @@ const Game = () => {
     const handleGuess = async () => {
         try {
             setLoading(true)
-            const accountResponse = await fetch(`https://airdaomarkets.xyz/api/v1/game/guess/${gameId}/`, {
+            const accountResponse = await fetch(`${localurl}/api/v1/game/guess/${gameId}/`, {
                 method: "POST",
                 headers: {
                     "Content-Type": "application/json"
@@ -136,6 +145,12 @@ const Game = () => {
         }
     }
 
+    const formatTime = (time) => {
+        const [hours, minutes, seconds] = time.split(":");
+        return `${hours}:${minutes}:${seconds.split(".")[0]}`;
+    };
+
+
 
     return (
         <div className="game">
@@ -149,6 +164,12 @@ const Game = () => {
                     <h1 className="title2">Guess My Number</h1>
                     <p>Guess a random number</p>
                     <p>1 to 100</p>
+                    {
+                        remaintime && <p style={{
+                            color: "red",
+                            fontSize: "1.1rem"
+                        }}>Your daily limit reached !! Please again Try after {formatTime(remaintime)}  hours.</p>
+                    }
                     {message === "error" && <p style={{
                         color: "red"
                     }}>Something went Wrong !</p>}
@@ -181,7 +202,7 @@ const Game = () => {
                                     {
                                         message === "congratulations" && <p style={{
                                             color: "green"
-                                        }}> Congratulations !! You $ADG won </p>
+                                        }}> Congratulations !! You won $ADG Rewards </p>
                                     }
                                     <GameGrid
                                         attemp={attemp}
@@ -227,12 +248,51 @@ const Game = () => {
                                             )
                                         }</button>
                                 </div> :
-                                <button className='get-btn' onClick={handleGetStarted}>Get Started</button>
+                                <button className='get-btn' onClick={handleGetStarted}>{
+                                    remaintime ? "Refresh" : "Get Started"
+                                }</button>
                         }
 
                     </div>
                 </>
             }
+            <div className="nft-grid">
+                <div style={{
+                    marginTop: "2rem",
+                    width: "400px",
+                    height: "400px",
+                    textAlign: "left",
+                    // border: "1px solid white",
+                    // display: "flex",
+                    // justifyContent: "center",
+                    // alignItems: "left",
+                    // flexDirection: "column",
+                    color: "white"
+                }}>
+                    <h1 style={{
+                        fontSize: "1.3rem"
+                    }}>Game Rule</h1>
+                    <div style={{
+                        // position: "absolute"
+                    }}>
+                        <p>
+                            1. Enter the range of numbers you want the target number to be between, and press New Target <br />
+                            2. Enter your guess<br />
+                            3. See if your guess is too high or too low<br />
+                            4. Change your guess<br />
+                            5. Only 25 attempts per day <br />
+                            6. If NFT holders win they are rewarded with 20 $ADG tokens.<br />
+                            7. If non-NFT holders win they are rewarded with 5 $ADG tokens.<br />
+
+
+
+                        </p>
+                    </div>
+
+                </div>
+            </div>
+
+
 
 
         </div>
